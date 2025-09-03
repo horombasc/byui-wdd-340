@@ -4,3 +4,229 @@
 *:after {
   box-sizing: border-box;
 }
+
+html {
+  background-image: url('../images/site/checkerboard.jpg');
+}
+
+/******* Body ***************/
+body {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: white;
+  border: 0.2rem solid #004080;
+}
+
+/******* Header ***************/
+#top-header {
+  background-color: #004080;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 7px;
+}
+
+.siteName a {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+#top-header a {
+  color: white;
+  text-decoration: none;
+}
+
+#top-header a:hover {
+  text-decoration: underline;
+}
+
+/******* Navigation ***************/
+nav {
+  background-color: #e6e6e6;
+  margin-top: 0.5rem;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+nav li {
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+nav li:hover {
+  background-color: #cccccc;
+  cursor: pointer;
+}
+
+/******* Main ***************/
+h1 {
+  text-align: left;
+  margin: 1rem;
+  font-size: 1.5rem;
+}
+
+picture {
+  position: relative; /* makes picture the container */
+  display: block;
+  width: 100%;
+  padding: 1rem;
+}
+
+/******* Main Images ***************/
+picture img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.car-info {
+  position: absolute;
+  top: 20%;       /* adjust as needed */
+  left: 10%;      /* adjust as needed */
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.car-info p {
+  margin: 5px 0;
+  font-size: 12px;
+}
+
+.own-btn {
+  background-color: #004080;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.own-btn:hover {
+  background-color: #0088cc;
+}
+
+/******* Cards ***************/
+.cards {
+  display: flex;
+  flex-direction: column; /* stacked on mobile */
+  gap: 1rem;
+  margin: 1rem;
+  background-color: #e6e6e6;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.cards section {
+  background-color: white;
+  padding: .5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cards section h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.cards section ul li {
+  margin-bottom: 0.5rem;  
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/******* Updates ***************/
+.updates {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 per row on mobile */
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.images {
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.images img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.images a {
+  font-weight: bold;
+  display: block;
+}
+
+.images a:hover {
+  text-decoration: underline;
+}
+
+/******* Footer ***************/
+footer {
+  background-color: #004080;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+/******* Larger Screens ***************/
+@media (min-width: 600px) {
+
+  #top-header {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  nav ul {
+    justify-content: space-around;
+  }
+
+  .car-info {
+    position: absolute; /* overlay on desktop */
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+  }
+
+  .cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .cards section {
+    flex: 1 1 calc(50% - 1rem); /* 2 cards per row */
+  }
+
+  .updates {
+    grid-template-columns: repeat(2, 1fr); /* same on desktop */
+  }
+}
+
+
+
+
+
+
