@@ -1,6 +1,16 @@
-<% if (title) { %>
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main>
   <h1><%= title %></h1>
-<% } else {
-    res.redirect("/")
-}
-%>
+  <p><%- message %></p>
+
+  <section class="funny-error">
+    <h2>This is often done with 404 - File Not Found errors, but don't have to be limited to them.</h2>
+    <p>If you're interested, here are some funny 404 pages. Feel free to make your error view fun too!</p>
+    <p>Looks like our server took a wrong turn at Albuquerque 🤖🛣️</p>
+    <a href="/">Beam me back to safety</a>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
