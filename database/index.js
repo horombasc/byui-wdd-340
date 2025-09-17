@@ -4,7 +4,7 @@ require("dotenv").config();
 let pool;
 
 if (process.env.NODE_ENV === "development") {
-  // Local development
+  // Development: local testing
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
@@ -25,19 +25,12 @@ if (process.env.NODE_ENV === "development") {
     },
   };
 } else {
-  // Production (Render)
+  // Production: Render
   pool = new Pool({
-    connectionString: process.env.DATABASE_URL.replace(
-      "postgresql://",
-      "postgres://"
-    ),
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    connectionString: process.env.DATABASE_URL,
   });
 
   module.exports = {
-    pool,
     async query(text, params) {
       try {
         const res = await pool.query(text, params);
@@ -50,4 +43,5 @@ if (process.env.NODE_ENV === "development") {
     },
   };
 }
+
 
