@@ -1,61 +1,61 @@
-
-
 <main>
-  <h1><%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %> - 
-    <%= new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(vehicle.inv_price) %>
-  </h1>
-
   <section class="vehicle-detail">
-    <!-- Image Section -->
-    <div class="vehicle-images">
+    <!-- LEFT SIDE -->
+    <div class="vehicle-left">
       <!-- Main Image -->
-      <div class="main-image">
-        <img src="<%= vehicle.inv_image %>" alt="Image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>">
+      <div class="vehicle-image-wrapper">
+        <img id="mainImage" src="<%= vehicle.inv_image %>" 
+             alt="Main image of <%= vehicle.inv_make %> <%= vehicle.inv_model %>" 
+             class="main-image">
       </div>
 
-      <!-- Static Thumbnail Gallery -->
+      <!-- Thumbnails -->
       <div class="thumbnail-gallery">
-        <img src="/images/thumb1.jpg" alt="Thumbnail 1">
-        <img src="/images/thumb2.jpg" alt="Thumbnail 2">
-        <img src="/images/thumb3.jpg" alt="Thumbnail 3">
-        <img src="/images/thumb4.jpg" alt="Thumbnail 4">
+        <% gallery.forEach(img => { %>
+          <img src="<%= img %>" alt="Thumbnail" 
+               onclick="document.getElementById('mainImage').src = '<%= img %>'">
+        <% }) %>
       </div>
     </div>
 
-    <!-- Vehicle Info Section -->
-    <div class="vehicle-info">
-      <h2>Vehicle Details</h2>
-      <p><strong>Year:</strong> <%= vehicle.inv_year %></p>
-      <p><strong>Make:</strong> <%= vehicle.inv_make %></p>
-      <p><strong>Model:</strong> <%= vehicle.inv_model %></p>
-      <p><strong>Price:</strong> 
-        <%= new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(vehicle.inv_price) %>
-      </p>
-      <p><strong>Mileage:</strong> <%= vehicle.inv_miles.toLocaleString() %> miles</p>
-      <p><strong>MPG:</strong> <%= vehicle.inv_mpg || "29 City / 37 Hwy" %></p>
-      <p><strong>Exterior Color:</strong> <%= vehicle.inv_color || "Unknown" %></p>
-      <p><strong>Interior Color:</strong> <%= vehicle.inv_interior || "Unknown" %></p>
-      <p><strong>Fuel Type:</strong> <%= vehicle.inv_fuel || "Gasoline" %></p>
-      <p><strong>Drivetrain:</strong> <%= vehicle.inv_drive || "Front Wheel Drive" %></p>
-      <p><strong>Transmission:</strong> <%= vehicle.inv_transmission || "Xtronic CVT" %></p>
-      <p><strong>Stock #:</strong> <%= vehicle.inv_stock || "BDL08Q" %></p>
-      <p><strong>VIN:</strong> <%= vehicle.inv_vin || "3N1AB7APXKY247399" %></p>
-      <p><strong>Previous Use:</strong> <%= vehicle.inv_use || "Rental Vehicle" %></p>
-      <p><strong>Description:</strong> <%= vehicle.inv_description %></p>
+    <!-- RIGHT SIDE -->
+    <div class="vehicle-right">
+      <h2><%= vehicle.inv_year %> <%= vehicle.inv_make %> <%= vehicle.inv_model %></h2>
 
+      <!-- Price & Mileage -->
+      <div class="price-box">
+        <p class="mileage"><strong>Mileage:</strong> <%= vehicle.inv_miles.toLocaleString() %></p>
+        <p class="price">
+          No-Haggle Price<br>
+          <span><%= new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(vehicle.inv_price) %></span>
+        </p>
+      </div>
+
+      <!-- Specs -->
+      <div class="vehicle-specs">
+        <p><strong>MPG:</strong> <%= vehicle.inv_mpg || "29 City / 37 Hwy" %></p>
+        <p><strong>Ext. Color:</strong> <%= vehicle.inv_color || "Unknown" %></p>
+        <p><strong>Int. Color:</strong> <%= vehicle.inv_interior || "Black" %></p>
+        <p><strong>Fuel Type:</strong> <%= vehicle.inv_fuel || "Gasoline" %></p>
+        <p><strong>Drivetrain:</strong> <%= vehicle.inv_drive || "Front Wheel Drive" %></p>
+        <p><strong>Transmission:</strong> <%= vehicle.inv_transmission || "Xtronic CVT" %></p>
+        <p><strong>Stock #:</strong> <%= vehicle.inv_stock || "BDL08Q" %></p>
+        <p><strong>VIN:</strong> <%= vehicle.inv_vin || "3N1AB7APXKY247399" %></p>
+        <p><strong>Previous Use:</strong> <%= vehicle.inv_use || "Rental Vehicle" %></p>
+      </div>
+
+      <!-- Action Buttons -->
       <div class="vehicle-actions">
-        <a href="/start-purchase/<%= vehicle.inv_id %>" class="btn">Start My Purchase</a>
+        <a href="/start-purchase/<%= vehicle.inv_id %>" class="btn primary">Start My Purchase</a>
         <a href="/schedule-test-drive/<%= vehicle.inv_id %>" class="btn">Schedule Test Drive</a>
-        <a href="tel:8013967886" class="btn">Call Us</a>
-        <a href="/get-prequalified/<%= vehicle.inv_id %>" class="btn">Get Pre-Qualified</a>
+        <a href="/get-prequalified/<%= vehicle.inv_id %>" class="btn">Apply for Financing</a>
+      </div>
+
+      <!-- Call Section -->
+      <div class="contact-box">
+        <p>📞 Call Us <a href="tel:8013967886">801-396-7886</a></p>
       </div>
     </div>
   </section>
 </main>
-
-
-
-
-
-
 

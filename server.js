@@ -66,6 +66,18 @@ app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`)
 })
 
+// 404 handler for unmatched routes (optional)
+app.use((req, res, next) => {
+    res.status(404).render("error", { message: "Page not found" });
+});
+
+// General error-handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack); // For debugging
+    res.status(err.status || 500).render("error", { message: err.message });
+});
+
+
 module.exports = app
 
 

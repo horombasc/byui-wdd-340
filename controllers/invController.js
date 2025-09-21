@@ -3,9 +3,6 @@ const utilities = require("../utilities/")
 
 const invCont = {}
 
-/* ***************************
- *  Build inventory by classification view
- * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
   const classification_id = req.params.classificationId
   const data = await invModel.getInventoryByClassificationId(classification_id)
@@ -19,9 +16,6 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
-/* ***************************
- *  Build inventory item detail view
- * ************************** */
 invCont.buildDetailView = async function (req, res, next) {
   try {
     const inv_id = parseInt(req.params.inv_id)
@@ -32,15 +26,31 @@ invCont.buildDetailView = async function (req, res, next) {
       throw { status: 404, message: "Vehicle not found." }
     }
 
+    const vehicle = data[0]
+
+    // Convert comma-separated gallery string to array
+    const gallery = vehicle.inv_gallery?.split(",").map(img => img.trim()) || []
+
     res.render("./inventory/detail", {
-      title: `${data[0].inv_make} ${data[0].inv_model}`,
+      title: `${vehicle.inv_make} ${vehicle.inv_model}`,
       nav,
-      vehicle: data[0] // ✅ Pass full vehicle object to the view
+      vehicle,
+      gallery
     })
   } catch (error) {
     next(error)
   }
 }
 
+// --- Footer Error Test Function ---
+invCont.triggerError = (req, res, next) => {
+  try {
+    throw new Error("This is a footer-based test error!")
+  } catch (err) {
+    next(err) // pass error to middleware
+  }
+}
+
 module.exports = invCont
+
 
