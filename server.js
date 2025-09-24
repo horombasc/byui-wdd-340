@@ -3,38 +3,69 @@ const expressLayouts = require("express-ejs-layouts")
 require("dotenv").config()
 const path = require("path")
 const fs = require("fs")
+const session = require("express-session")
+const pool = require('./database/')
 const app = express()
 
+// Routes & Controllers
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const accountRoute = require("./routes/accountRoute")
 const utilities = require("./utilities")
+
+/* ***********************
+ * Middleware
+ ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+// Flash Messages Middleware
+app.use(require('connect-flash')())
+app.use((req, res, next) => {
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
+// Parse URL-encoded and JSON bodies (for form submissions)
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 // View Engine
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout")
 
-// Middleware
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-
-// Routes
+// Static files
 app.use(static)
+
+/* ***********************
+ * Routes
+ ************************/
 app.get("/", utilities.handleErrors(baseController.buildHome))
 app.use("/inv", inventoryRoute)
+app.use("/account", accountRoute)
 
-// File Not Found Route - must be last route in list
-app.use(async (req, res, next) => {
+/* ***********************
+ * 404 Handler - must be last route
+ *************************/
+app.use((req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." })
 })
 
 /* ***********************
  * Express Error Handler
- * Place after all other middleware
  *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
+  const nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
 
   const message =
@@ -60,24 +91,14 @@ app.use(async (err, req, res, next) => {
   }
 })
 
-// Local Server Information
+// Start server
 const PORT = process.env.PORT || 5500
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`)
 })
 
-// 404 handler for unmatched routes (optional)
-app.use((req, res, next) => {
-    res.status(404).render("error", { message: "Page not found" });
-});
-
-// General error-handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack); // For debugging
-    res.status(err.status || 500).render("error", { message: err.message });
-});
-
-
 module.exports = app
+
+
 
 
