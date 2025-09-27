@@ -1,0 +1,24 @@
+
+
+<main>
+  <h1 class="add">Add New Classification</h1>
+
+  <a href="/inv" class="back-button">← Back to Management</a>
+
+  <% if (errors && errors.length > 0) { %>
+    <ul class="flash-message">
+      <% errors.forEach(error => { %>
+        <li><%= error %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <form class="add-classification-form" action="/inv/add-classification" method="post">
+    <label for="classification_name">Classification Name</label>
+    <input type="text" name="classification_name" id="classification_name" required value="<%= classification_name %>">
+    
+    <button type="submit">Add Classification</button>
+  </form>
+</main>
+
+

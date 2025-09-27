@@ -538,6 +538,242 @@ main.registration-page .flash-message {
   margin-bottom: 1rem;
 }
 
+/* -----------------------
+   Back to Management Button
+------------------------- */
+.back-button {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px 15px;
+  background-color: #0077cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #005fa3;
+}
+
+.add {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #333;
+}
+/* -----------------------
+   Add Inventory Form
+------------------------- */
+.add-inventory-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.add-inventory-form label {
+  font-weight: bold;
+}
+
+.add-inventory-form input,
+.add-inventory-form textarea,
+.add-inventory-form select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-inventory-form button {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-inventory-form button:hover {
+  background-color: #218838;
+}
+
+/* -----------------------
+   Flash Messages
+------------------------- */
+.flash-message {
+  background-color: #ffdddd;
+  border-left: 6px solid #f44336;
+  padding: 10px;
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+/* -----------------------
+   Back to Management Button
+------------------------- */
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #0077cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #005fa3;
+}
+
+/* -----------------------
+   Add Classification Form
+------------------------- */
+.add-classification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.add-classification-form label {
+  font-weight: bold;
+}
+
+.add-classification-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-classification-form button {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-classification-form button:hover {
+  background-color: #218838;
+}
+
+/* -----------------------
+   Flash Messages
+------------------------- */
+.flash-message {
+  background-color: #ffdddd;
+  border-left: 6px solid #f44336;
+  padding: 10px;
+  margin-bottom: 20px;
+  list-style-type: none;
+}
+
+/* -----------------------
+   Inventory Management Page
+------------------------- */
+.inventory-management {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.inventory-management h1.add {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Flash Messages */
+.inventory-management .flash-message {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border-left: 6px solid #17a2b8;
+  padding: 10px;
+  margin-bottom: 25px;
+  border-radius: 4px;
+}
+
+/* Management Links */
+.management-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.management-links p {
+  margin: 0;
+}
+
+.management-links a {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #0077cc;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.management-links a:hover {
+  background-color: #005fa3;
+}
+
+/* -----------------------
+   Responsive
+------------------------- */
+@media (max-width: 768px) {
+  .management-links {
+    gap: 10px;
+  }
+
+  .management-links a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* -----------------------
+   Responsive
+------------------------- */
+@media (max-width: 768px) {
+  .add-classification-form {
+    padding: 0 10px;
+  }
+
+  .back-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* -----------------------
+   Responsive
+------------------------- */
+@media (max-width: 768px) {
+  .add-inventory-form {
+    padding: 0 10px;
+  }
+
+  .back-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
 
 
 
