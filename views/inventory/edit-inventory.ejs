@@ -3,9 +3,13 @@
 
     <h1 class="add"><%= title %></h1>
 
+    <%# Display flash messages %>
+    <%- messages() %>
+
+    <%# Display server-side validation errors %>
     <% if (errors) { %>
       <ul class="flash-message">
-        <% errors.forEach(error => { %>
+        <% errors.array().forEach(error => { %>
           <li><%= error.msg %></li>
         <% }) %>
       </ul>
@@ -47,16 +51,15 @@
       
       <button type="submit">Update Vehicle</button>
 
+      <!-- CRITICAL: Hidden field to identify the item being updated -->
       <input type="hidden" name="inv_id"
         <% if(inv_id) { %> value="<%= inv_id %>"
         <% } %>>
 
+      <!-- Hidden field to stick the classification ID in case of error -->
       <input type="hidden" name="classification_id"
         <% if(classification_id) { %> value="<%= classification_id %>"
         <% } %>>
 
     </form>
 </main>
-
-
-

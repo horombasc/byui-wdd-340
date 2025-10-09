@@ -1,24 +1,40 @@
-
-
 <main>
-  <h1 class="add">Add New Classification</h1>
+    <h1 class="add">Add New Classification</h1>
 
-  <a href="/inv" class="back-button">← Back to Management</a>
+    <a href="/inv" class="back-button">← Back to Management</a>
 
-  <% if (errors && errors.length > 0) { %>
-    <ul class="flash-message">
-      <% errors.forEach(error => { %>
-        <li><%= error %></li>
-      <% }) %>
-    </ul>
-  <% } %>
+    <%# Flash Messages (Success/Failure) %>
+    <%- messages() %>
 
-  <form class="add-classification-form" action="/inv/add-classification" method="post">
-    <label for="classification_name">Classification Name</label>
-    <input type="text" name="classification_name" id="classification_name" required value="<%= classification_name %>">
-    
-    <button type="submit">Add Classification</button>
-  </form>
+    <%# Server-Side Validation Errors %>
+    <% if (errors) { %>
+        <ul class="notice">
+            <% errors.array().forEach(error => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+
+    <%# Task Requirement: User Instruction %>
+    <p class="form-instructions">
+        The new classification name cannot contain spaces or special characters of any kind.
+    </p>
+
+    <form class="add-classification-form" action="/inv/add-classification" method="post">
+        <label for="classification_name">Classification Name</label>
+        <input 
+            type="text" 
+            name="classification_name" 
+            id="classification_name" 
+            required 
+            <%# Task Requirement: Client-side validation pattern %>
+            pattern="[A-Za-z0-9]+" 
+            title="Only letters and numbers are allowed, with no spaces."
+            value="<%= locals.classification_name %>"
+        >
+        
+        <button type="submit">Add Classification</button>
+    </form>
 </main>
 
 
