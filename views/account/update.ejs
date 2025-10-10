@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body id="update-page">
+  <main>
+    <%# Display flash messages %>
+    <%- messages() %>
+
+    <h1><%= title %></h1>
+
+    <!-- ===== ACCOUNT UPDATE FORM ===== -->
+    <section class="account-update">
+      <h2>Update Account Information</h2>
+      <form action="/account/update" method="POST">
+        <!-- Hidden account ID -->
+        <input type="hidden" name="account_id" value="<%= account.account_id %>" />
+
+        <!-- First Name -->
+        <label for="account_firstname">First Name</label>
+        <input 
+          type="text" 
+          id="account_firstname" 
+          name="account_firstname" 
+          value="<%= account.account_firstname %>" 
+          required
+        />
+
+        <!-- Last Name -->
+        <label for="account_lastname">Last Name</label>
+        <input 
+          type="text" 
+          id="account_lastname" 
+          name="account_lastname" 
+          value="<%= account.account_lastname %>" 
+          required
+        />
+
+        <!-- Email -->
+        <label for="account_email">Email</label>
+        <input 
+          type="email" 
+          id="account_email" 
+          name="account_email" 
+          value="<%= account.account_email %>" 
+          required
+        />
+
+        <input type="submit" value="Update Account" />
+      </form>
+    </section>
+
+    <!-- ===== CHANGE PASSWORD FORM ===== -->
+    <section class="change-password">
+      <h2>Change Password</h2>
+      <p>Enter a new password to update your current password. Must be at least 8 characters, include uppercase, lowercase, and a number.</p>
+      <form action="/account/updatePassword" method="POST">
+        <!-- Hidden account ID -->
+        <input type="hidden" name="account_id" value="<%= account.account_id %>" />
+
+        <!-- New Password -->
+        <label for="account_password">New Password</label>
+        <input 
+          type="password" 
+          id="account_password" 
+          name="account_password" 
+          required
+        />
+
+        <input type="submit" value="Change Password" />
+      </form>
+    </section>
+
+  </main>
+</body>
+</html>

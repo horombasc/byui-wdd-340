@@ -8,33 +8,28 @@
 </head>
 <body>
   <main>
-    <%# Display flash messages %>
+    <!-- Display flash messages -->
     <%- messages() %>
 
-    <h1>You're logged in</h1>
+    <!-- Greeting -->
+    <h2>Welcome <%= accountData.account_firstname %></h2>
 
-    <p>Welcome, <%= locals.accountData.account_firstname %> <%= locals.accountData.account_lastname %>!</p>
-    <p>Your account type: <%= locals.accountData.account_type %></p>
-    
-    <%# --- LINK TO INVENTORY MANAGEMENT (Visible only to authorized users) --- %>
-    <% if (locals.accountData.account_type === 'Admin' || locals.accountData.account_type === 'Employee') { %>
-      <div class="management-link-box">
-        <h2>Inventory Management</h2>
-        <p>This is where you can access the tools to manage vehicle inventory.</p>
-        <p><a href="/inv" title="Go to Inventory Management Tools">Manage Inventory</a></p>
-      </div>
+    <!-- Update Account Link (Always visible) -->
+    <p><a href="/account/update/<%= accountData.account_id %>" title="Update your account information">Update Account Information</a></p>
+
+    <!-- Inventory Management (Employees/Admins only) -->
+    <% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
+      <h3>Inventory Management</h3>
+      <p>
+        Access the tools to manage vehicle inventory: 
+        <a href="/inv" title="Go to Inventory Management Tools">Manage Inventory</a>
+      </p>
     <% } %>
-    
-    <%# Other Account options would go here %>
-    <div class="account-options">
-      <h3>Account Settings</h3>
-      <p>Update account information or manage messages.</p>
-      <p><a href="/account/update" title="Update Account Information">Update Account Information</a></p>
-      <p><a href="/account/messages" title="Manage Messages">Manage Messages</a></p>
-    </div>
 
   </main>
 </body>
 </html>
+
+
 
 
