@@ -4,7 +4,7 @@ require("dotenv").config();
 const path = require("path");
 const fs = require("fs");
 const session = require("express-session");
-const pool = require("./database/");
+const pool = require("./database");
 const cookieParser = require("cookie-parser");
 const app = express();
 
@@ -13,13 +13,10 @@ const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
 const accountRoute = require("./routes/accountRoute");
+const favoriteRoute = require("./routes/favoriteRoute");
 const utilities = require("./utilities");
 
-// ************************
 // Middleware
-// ************************
-
-
 
 // Session setup
 app.use(
@@ -58,23 +55,18 @@ app.set("layout", "./layouts/layout");
 // Static files
 app.use(static);
 
-// ************************
 // Routes
-// ************************
 app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", inventoryRoute);
 app.use("/account", accountRoute);
+app.use("/favorites", favoriteRoute);
 
-// ************************
 // 404 Handler
-// ************************
 app.use((req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." });
 });
 
-// ************************
 // Express Error Handler
-// ************************
 app.use(async (err, req, res, next) => {
   const nav = await utilities.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
@@ -109,6 +101,9 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
+
+
 
 
 

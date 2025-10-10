@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <main>
+    <div class="favorites-container">
+      <h1><%= title %></h1>
+
+      <% if (favorites && favorites.length > 0) { %>
+        <% favorites.forEach(fav => { %>
+          <div class="favorite-item">
+            <div class="favorite-info">
+              <h3><%= fav.inv_make %> <%= fav.inv_model %></h3>
+              <p><strong>Year:</strong> <%= fav.inv_year %></p>
+              <p><strong>Price:</strong> $<%= fav.inv_price %></p>
+            </div>
+            <form action="/favorites/remove/<%= fav.favorite_id %>" method="POST">
+              <button class="remove-btn" type="submit">Remove</button>
+            </form>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p class="no-favorites">You haven't added any favorites yet.</p>
+      <% } %>
+    </div>
+  </main>
+</body>
+</html>
