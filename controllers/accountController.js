@@ -207,6 +207,30 @@ async function logout(req, res, next) {
   res.redirect("/");
 }
 
+/* ========== Render Favorites Page ========== */
+async function buildFavorites(req, res, next) {
+  const nav = await utilities.getNav();
+  const accountData = res.locals.accountData;
+
+  if (!accountData) {
+    req.flash("notice", "You must be logged in to view favorites.");
+    return res.redirect("/account/login");
+  }
+
+  try {
+    const favorites = await accountModel.getFavoritesByAccountId(accountData.account_id);
+
+    res.render("account/favorites", {
+      title: "My Favorites",
+      nav,
+      favorites, // Pass favorites array to EJS
+    });
+  } catch (error) {
+    console.error("Error loading favorites:", error);
+    next(error);
+  }
+}
+
 module.exports = {
   buildLogin,
   buildRegister,
@@ -217,7 +241,9 @@ module.exports = {
   updateAccountInfo,
   updatePassword,
   logout,
+  buildFavorites, 
 };
+
 
 
 

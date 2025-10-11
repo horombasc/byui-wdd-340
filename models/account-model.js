@@ -82,6 +82,25 @@ accountModel.updatePassword = async (account_id, hashedPassword) => {
   }
 };
 
+/* ===== Get favorites for an account ===== */
+accountModel.getFavoritesByAccountId = async (account_id) => {
+  try {
+    const sql = `
+      SELECT i.inv_id, i.inv_make, i.inv_model
+      FROM favorites f
+      JOIN inventory i ON f.inv_id = i.inv_id
+      WHERE f.account_id = $1
+      ORDER BY i.inv_make, i.inv_model
+    `;
+    const result = await pool.query(sql, [account_id]);
+    return result.rows;
+  } catch (error) {
+    console.error("Error fetching favorites:", error);
+    return [];
+  }
+};
+
+
 module.exports = accountModel;
 
 

@@ -51,6 +51,27 @@
         <a href="/get-prequalified/<%= vehicle.inv_id %>" class="btn">Apply for Financing</a>
       </div>
 
+      <!-- Favorite Button -->
+      <% if (locals.accountData) { %>
+  <% if (isFav) { %>
+    <form action="/favorites/remove" method="POST" style="margin-top:15px;">
+      <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+      <button type="submit" class="btn-favorite remove">
+        💔 Remove from Favorites
+      </button>
+    </form>
+  <% } else { %>
+    <form action="/favorites/add" method="POST" style="margin-top:15px;">
+      <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+      <button type="submit" class="btn-favorite">
+        ❤️ Add to Favorites
+      </button>
+        </form>
+        <% } %>
+      <% } %>
+
+
+
       <!-- Call Section -->
       <div class="contact-box">
         <p>📞 Call Us <a href="tel:8013967886">801-396-7886</a></p>

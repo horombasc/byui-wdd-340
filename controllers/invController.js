@@ -135,7 +135,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 // Inventory detail view
 invCont.buildDetailView = async function (req, res, next) {
   try {
-    const inv_id = parseInt(req.params.invId) // ✅ matches route parameter
+    const inv_id = parseInt(req.params.invId) 
     const data = await invModel.getVehicleById(inv_id)
     const nav = await utilities.getNav()
 
@@ -153,6 +153,45 @@ invCont.buildDetailView = async function (req, res, next) {
       gallery
     })
   } catch (error) {
+    next(error)
+  }
+}
+
+// buildByInventoryId with favorite support
+invCont.buildByInventoryId = async function (req, res, next) {
+  const invId = parseInt(req.params.invId);
+
+  try {
+    const data = await invModel.getVehicleById(invId); // use your existing model
+    const vehicle = data[0];
+
+    if (!vehicle) {
+      return res.status(404).render("errors/404", {
+        title: "Vehicle Not Found",
+        message: "The vehicle you're looking for does not exist.",
+      });
+    }
+
+    const nav = await utilities.getNav() // pass nav
+    const gallery = vehicle.inv_gallery?.split(",").map(img => img.trim()) || []
+
+    // Check if logged in user has this car as a favorite
+    let isFav = false
+    if (res.locals.accountData) {
+      const favCheck = await invModel.isFavorite(res.locals.accountData.account_id, invId)
+      isFav = favCheck
+    }
+
+    res.render("inventory/detail", {
+      title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+      nav,
+      vehicle,
+      gallery,
+      isFav,
+    })
+
+  } catch (error) {
+    console.error("Error loading vehicle details:", error)
     next(error)
   }
 }
@@ -267,6 +306,10 @@ invCont.deleteInventoryItem = async function (req, res, next) {
 }
 
 module.exports = invCont
+
+
+
+
 
 
 

@@ -816,64 +816,99 @@ main.registration-page .flash-message {
   line-height: 1.4;
 }
 
- /* Scoped styles just for the favorites page */
-    .favorites-container {
+ .favorites-container {
       max-width: 900px;
-      margin: 2rem auto;
-      padding: 1.5rem;
+      margin: 60px auto;
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     }
 
     .favorites-container h1 {
-      color: var(--primary-color, #222);
+      color: #0056b3;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
       text-align: center;
-      margin-bottom: 1rem;
+    }
+
+    .favorite-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
     .favorite-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem;
-      border-bottom: 1px solid #eee;
+      background: #f9fbff;
+      border: 1px solid #e1e7f0;
+      border-radius: 12px;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .favorite-item:last-child {
-      border-bottom: none;
+    .favorite-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
 
-    .favorite-info h3 {
-      margin: 0;
+    .favorite-item a {
+      text-decoration: none;
+      color: #003366;
+      font-weight: 600;
       font-size: 1.1rem;
-      color: #333;
-    }
-
-    .favorite-info p {
-      margin: 0.3rem 0 0;
-      color: #666;
     }
 
     .remove-btn {
-      background: #c0392b;
+      background: #ff4d4d;
       color: #fff;
       border: none;
-      padding: 0.5rem 0.8rem;
-      border-radius: 6px;
+      border-radius: 8px;
+      padding: 8px 14px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: background 0.2s;
     }
 
     .remove-btn:hover {
-      background: #a93226;
+      background: #e63e3e;
     }
 
     .no-favorites {
       text-align: center;
+      padding: 40px 20px;
       color: #555;
-      padding: 2rem 0;
+      background: #f9fbff;
+      border-radius: 12px;
+      border: 1px solid #e1e7f0;
     }
+
+    .btn-favorite {
+  background: #0056b3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-favorite:hover {
+  background: #004494;
+  transform: translateY(-2px);
+}
+
+.btn-favorite.remove {
+  background: #ff4d4d;
+}
+
+.btn-favorite.remove:hover {
+  background: #e63e3e;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

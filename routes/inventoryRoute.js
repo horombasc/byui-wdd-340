@@ -14,8 +14,8 @@ router.get("/",
 // Get inventory items by classification (Public)
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
-// Get inventory item details (Public)
-router.get("/detail/:invId", utilities.handleErrors(invController.buildDetailView));
+// Get inventory item details (Public) — now uses buildByInventoryId
+router.get("/detail/:invId", utilities.handleErrors(invController.buildByInventoryId));
 
 // Build add classification view (Secured)
 router.get("/add-classification", 
@@ -61,7 +61,9 @@ router.post("/delete/",
     utilities.handleErrors(invController.deleteInventoryItem)
 );
 
-module.exports = router;
+module.exports = router
+
+
 
 
 

@@ -120,6 +120,15 @@ async function deleteInventoryItem(inv_id) {
   }
 }
 
+/* ***************************
+ *  Check if a car is a favorite
+ * ************************** */
+async function isFavorite(account_id, inv_id) {
+  const sql = "SELECT 1 FROM favorites WHERE account_id = $1 AND inv_id = $2";
+  const result = await pool.query(sql, [account_id, inv_id]);
+  return result.rowCount > 0;
+}
+
 module.exports = {
   getClassifications,
   getInventoryByClassificationId,
@@ -127,7 +136,8 @@ module.exports = {
   addClassification,
   addInventory,
   updateInventory,
-  deleteInventoryItem // <-- Now correctly exported!
+  deleteInventoryItem,
+  isFavorite
 }
 
 

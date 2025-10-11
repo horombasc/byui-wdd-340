@@ -16,6 +16,9 @@ router.get("/", utilities.checkJWTToken, accountController.buildAccountManagemen
 router.get("/update/:id", utilities.checkJWTToken, accountController.buildUpdateAccount);
 router.post("/update", utilities.checkJWTToken, accountController.updateAccountInfo);
 router.post("/updatePassword", utilities.checkJWTToken, accountController.updatePassword);
+// Favorites page (Secured)
+router.get("/favorites", utilities.checkLogin, utilities.handleErrors(accountController.buildFavorites));
+
 
 // Logout
 router.get("/logout", accountController.logout);

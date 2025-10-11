@@ -8,6 +8,7 @@ const pool = require("./database");
 const cookieParser = require("cookie-parser");
 const app = express();
 
+
 // Routes & Controllers
 const static = require("./routes/static");
 const baseController = require("./controllers/baseController");
